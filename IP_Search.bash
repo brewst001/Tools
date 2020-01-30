@@ -1,7 +1,7 @@
 ##READ COMMENTS IF YOU WANT TO IDENTIFY VARIABLE NAMES
 ##FN1=the filename of contents that need to be parsed
 ####Brewst pieced this together from trash. Don't expect perfection.
-##
+####
 ##
 clear
 echo "$(tput setaf 1)$(tput bold)$This script parses through a file and finds all IP addresses. It will then sort and count the duplicates if you choose.$(tput sgr 0)"
