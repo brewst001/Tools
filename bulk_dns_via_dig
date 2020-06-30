@@ -1,0 +1,53 @@
+##READ COMMENTS IF YOU WANT TO IDENTIFY VARIABLE NAMES
+##FN1=the filename of contents that need to be parsed
+####Brewst pieced this together from trash. Don't expect perfection.
+####
+##
+echo "$(tput setaf 1)$(tput bold)$This script bulk lookups domains via the dig command.$(tput sgr 0)"
+read -rsn1 -p "Press any key to continue"
+echo -e "Please provide name of file you wish to parse through"
+read -p "Enter a filename: " FN1
+sleep 1
+if [[ -f $FN1 ]] ; then
+	echo "File $(tput setaf 3)$FN1$(tput sgr 0) found."
+sleep 1
+else 
+	echo "File $(tput setaf 1)$FN1$(tput sgr 0) does not exist. Please check your filename."
+	echo "Search failed. Press any key to quit"
+	while [ true ] ; do
+	read -t 30 -n 1
+	if [ $? = 0 ] ; then
+	exit ;
+	else
+	read -p "Enter your name: " AN
+	echo "$AN dIdnT pReSs a kEy tO qUiT"
+fi
+	done
+
+fi
+##
+##
+##
+##CM=command analyst chose.
+##
+##
+##
+while [ -z "$CM" ] ;
+do
+echo "please annotate which DNS server you would like to use. please enter it in IP format. If you do not enter an IP this will fail."
+echo "type exit to cancel"
+printf " Enter selection>";
+read CM
+##
+##
+if [ "$CM" -eq exit ] ; then
+	echo "exiting"
+	sleep 1
+	exit
+else
+	dig @$CM -f $FN1 +noall +answer > Domain_list_complete.txt
+	sleep 1
+	echo "A File named $(tput setaf 1)Domain_list_complet(tput sgr 0) has been created in your directory."
+	read -rsn1 -p "press any key to quit"
+	exit
+fi
