@@ -4,36 +4,46 @@ Again, this is here to make it easy for people.
 CENTOS
 
 alias "ll=ls -al"
+#this ll command just helps when viewing files in the directory. 
+
 sudo yum update
 sudo yum install gcc
 sudo nano /etc/ssh/sshd_config
 #uncomment Port 22 and replace 22 with the desired port
+
 firewall-cmd --add-port=117/tcp --permanent
 firewall-cmd --reload
 systemctl restart sshd
 #now it is a good idea to relogin with your new port
+
 git clone https://github.com/skeeto/endlessh
 cd endlessh
 make
 sudo mv endlessh /usr/local/bin/
 #can use ``which endlessh`` to verify location
+
 sudo cp util/endlessh.service /etc/systemd/system/
 sudo systemctl enable endlessh
 mkdir -p /etc/endlessh
 sudo nano /etc/endlessh/config
 #specify ``Port 22`` yes a capital P. ctrl + O to save and then ctrl + X to exit
+
 sudo systemctl start endlessh
 netstat -tulpn | grep endless
 #:::22 should be the port
 #attempt to login via port 22 and it should just sit there. forever.
 
-passwordless login
+PASSWORDLESS LOGIN
 
 useradd -m -s /bin/bash brewst
-```passwd brewst```
+
+passwd brewst
+
 #set the password for the new user
+
 usermod -aG wheel brewst
 mkdir /home/brewst/.ssh
+
 #use puttygen or other tool to generate ssh keys
 #you can use winscp or other tool to access the server via sftp if needed.
 #remember to use the port you set previously for ssh.
@@ -42,6 +52,8 @@ mkdir /home/brewst/.ssh
 #verify you can login with the keypair prior to doing the next step!
 
 sudo nano /etc/ssh/sshd_config
+
 #set ``PermitRootLogin yes`` to no. and remember to remove comments.p
 #set ``#PasswordAuthentication no``
+
 systemctl restart sshd
