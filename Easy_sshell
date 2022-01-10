@@ -30,7 +30,7 @@ netstat -tulpn | grep endless
 passwordless login
 
 useradd -m -s /bin/bash brewst
-``passwd brewst``
+```passwd brewst```
 #set the password for the new user
 usermod -aG wheel brewst
 mkdir /home/brewst/.ssh
